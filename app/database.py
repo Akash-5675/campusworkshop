@@ -2,26 +2,7 @@
 from app import postgres
 
 
-def fetch_todo() -> dict:
-    """Reads all tasks listed in the todo table
-    Returns:
-        A list of dictionaries
-    """
-    cursor = postgres.cursor()
-    cursor.execute("Select * from tasks ORDER BY id ASC;")
-    data = cursor.fetchall()
-    postgres.commit()
-    cursor.close()
-    todo_list = []
-    print(data)
-    for result in data:
-        item = {
-            "id": result[0],
-            "task": result[1],
-            "status": result[2]
-        }
-        todo_list.append(item)
-    return todo_list
+
 
 
 """Assignment 2
@@ -40,6 +21,8 @@ def update_task_entry(task_id: int , text: str):
     cursor.execute(query)
     postgres.commit()
     cursor.close()
+    
+
 
 
 def insert_new_task(text: str , id: int) -> int:
@@ -56,6 +39,9 @@ def insert_new_task(text: str , id: int) -> int:
     cursor.close()
 
     return query
+
+
+
 
 
 def remove_task_by_id(task_id: int) -> None:
